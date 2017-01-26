@@ -14,6 +14,7 @@ class Client
     private $_timeout = 45;
     private $_proxyHost = null;
     private $_proxyPort = null;
+    private $_endpoint = null;
 
     public function getVersion() {
         return Constants::SDK_VERSION;
@@ -27,7 +28,7 @@ class Client
         $auth = explode(':', $privateKey);
 
         if (count($auth) != 2) {
-            throw new LyraNetworkException("invalid private key: " . $private_key);
+            throw new LyraNetworkException("invalid private key");
         }
 
         $this->_privateKey = $privateKey;
