@@ -1,10 +1,10 @@
 # Lyra Network REST api SDK
 
 
-[![Build Status](https://travis-ci.org/lyranetwork/krypton-php-sdk.svg?branch=master)](https://travis-ci.org/lyranetwork/krypton-php-sdk)
-[![Coverage Status](https://coveralls.io/repos/github/lyranetwork/krypton-php-sdk/badge.svg?branch=master)](https://coveralls.io/github/lyranetwork/krypton-php-sdk?branch=master)
+[![Build Status](https://travis-ci.org/LyraNetwork/krypton-php-sdk.svg?branch=master)](https://travis-ci.org/LyraNetwork/krypton-php-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/LyraNetwork/krypton-php-sdk/badge.svg?branch=master)](https://coveralls.io/github/LyraNetwork/krypton-php-sdk?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/lyranetwork/krypton-php-sdk/v/stable)](https://packagist.org/packages/lyranetwork/krypton-php-sdk)
-[![Latest Unstable Version](https://poser.pugx.org/lyranetwork/krypton-php-sdk/v/unstable)](//packagist.org/packages/lyranetwork/krypton-php-sdk)
+[![Latest Unstable Version](https://poser.pugx.org/lyranetwork/krypton-php-sdk/v/unstable)](//packagist.org/packages/LyraNetwork/krypton-php-sdk)
 [![Total Downloads](https://poser.pugx.org/lyranetwork/krypton-php-sdk/downloads)](https://packagist.org/packages/lyranetwork/krypton-php-sdk)
 [![License](https://poser.pugx.org/lyranetwork/krypton-php-sdk/license)](https://packagist.org/packages/lyranetwork/krypton-php-sdk)
 
@@ -36,7 +36,7 @@ require_once('vendor/autoload.php');
 
 ## Manual Installation
 
-If you do not want to use Composer, you can download the [latest release from github](https://github.com/lyranetwork/krypton-php-sdk/releases). 
+If you do not want to use Composer, you can download the [latest release from github](https://github.com/LyraNetwork/krypton-php-sdk/releases). 
 To use the SDK, include the `autoload.php` file:
 
 ```php
@@ -45,9 +45,9 @@ require_once('/path/to/php-sdk/autoload.php');
 
 ## SDK Usage
 
-A simple integration example is [available here](https://github.com/lyranetwork/krypton-php-examples/blob/master/src/SDKTest.php)
+A simple integration example is [available here](https://github.com/LyraNetwork/krypton-php-examples/blob/master/src/SDKTest.php)
 
-You can also take a look to our github examples repository: https://github.com/lyranetwork/krypton-php-examples
+You can also take a look to our github examples repository: https://github.com/LyraNetwork/krypton-php-examples
 
 ## Run tests
 

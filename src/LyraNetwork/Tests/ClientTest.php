@@ -17,7 +17,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         $store = array("value" => "sdk test string value");
         
-        $client = new Client("69876357:testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client = new Client();
+        $client->setPrivateKey("69876357:testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client->setEndpoint("https://secure.payzen.eu/api-payment/V3/");
         $response = $client->post('Charge/SDKTest', $store);
 
         $this->assertEquals("SUCCESS", $response["status"]);
@@ -31,7 +33,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         $store = array("value" => "sdk test string value");
         
-        $client = new Client("69876357:testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client = new Client();
+        $client->setPrivateKey("69876357:testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client->setEndpoint("https://secure.payzen.eu/api-payment/V3/");
         $response = $client->postWithFileGetContents('Charge/SDKTest', $store);
 
         $this->assertEquals("SUCCESS", $response["status"]);
@@ -45,7 +49,31 @@ class ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testClientWrongKey()
     {
-        new Client("wrongkey");
+        $client = new Client();
+        $client->setPrivateKey("wrongkey");
+    }
+
+    /**
+     * ./vendor/bin/phpunit --filter testNoPrivateKey src/LyraNetwork/Tests/ClientTest.php
+     *
+     * @expectedException LyraNetwork\Exceptions\LyraNetworkException
+     */
+    public function testNoPrivateKey()
+    {
+        $client = new Client();
+        $client->post("A", array());
+    }
+
+    /**
+     * ./vendor/bin/phpunit --filter testNoEndpoint src/LyraNetwork/Tests/ClientTest.php
+     *
+     * @expectedException LyraNetwork\Exceptions\LyraNetworkException
+     */
+    public function testNoEndpoint()
+    {
+        $client = new Client();
+        $client->setPrivateKey("A:B");
+        $client->post("A", array());
     }
 
     /**
@@ -55,7 +83,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         $store = array("value" => "sdk test string value");
         
-        $client = new Client("69876357:testprivatekey_FAKE");
+        $client = new Client();
+        $client->setPrivateKey("69876357:testprivatekey_FAKE");
+        $client->setEndpoint("https://secure.payzen.eu/api-payment/V3/");
         $response = $client->post('Charge/SDKTest', $store);
 
         $this->assertEquals("ERROR", $response["status"]);
@@ -69,7 +99,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         $store = array("value" => "sdk test string value");
         
-        $client = new Client("69876357:testprivatekey_FAKE");
+        $client = new Client();
+        $client->setPrivateKey("69876357:testprivatekey_FAKE");
+        $client->setEndpoint("https://secure.payzen.eu/api-payment/V3/");
         $response = $client->postWithFileGetContents('Charge/SDKTest', $store);
 
         $this->assertEquals("ERROR", $response["status"]);
@@ -82,7 +114,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
     public function testClientConfiguration()
     {
         $client = new Client("A:B");
+        $client->setPrivateKey("A:B");
         $client->setPublickey("33148340:testpublickey_l83P7WpRK2hoUIcWyFVQsd4Omsz0XbCKYtNKeGbpX6CvS");
+        $client->setEndpoint("https://secure.payzen.eu/api-payment/V3/");
 
         $this->assertEquals(Constants::SDK_VERSION, $client->getVersion());
         $this->assertEquals("33148340:testpublickey_l83P7WpRK2hoUIcWyFVQsd4Omsz0XbCKYtNKeGbpX6CvS", $client->getPublicKey());
@@ -95,7 +129,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testFakeProxy()
     {
-        $client = new Client("69876357:testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client = new Client();
+        $client->setPrivateKey("69876357:testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client->setEndpoint("https://secure.payzen.eu/api-payment/V3/");
         $client->setTimeOuts(1,1);
         $client->setProxy('fake.host', 1234);
 
@@ -108,7 +144,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidAnswer()
     {
-        $client = new Client("69876357:testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client = new Client();
+        $client->setPrivateKey("69876357:testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client->setEndpoint("https://secure.payzen.eu/api-payment/V3/");
 
         $store = "FAKE";
         $response = $client->post('Charge/SDKTest', $store);

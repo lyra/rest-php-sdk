@@ -5,6 +5,7 @@
 - Add file_get_contents fallback when CURL is not installed
 - Add CA root certificate to fix WAMP curl + https 
 - Rename namespace to LyraNetwork
+- Allow to define API endpoint
 
 ### v3.0.1 2016-12-05
 

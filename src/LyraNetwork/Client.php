@@ -10,26 +10,29 @@ class Client
     private $_password = null;
     private $_privateKey = null;
     private $_publicKey = null;
-    private $_endpoint = Constants::END_POINT;
     private $_connectionTimeout = 45;
     private $_timeout = 45;
     private $_proxyHost = null;
     private $_proxyPort = null;
 
-    function __construct($private_key) {
-        $auth = explode(':', $private_key);
+    public function getVersion() {
+        return Constants::SDK_VERSION;
+    }
+
+    public function setEndpoint($endpoint) {
+         $this->_endpoint = $endpoint;
+    }
+
+    public function setPrivateKey($privateKey) {
+        $auth = explode(':', $privateKey);
 
         if (count($auth) != 2) {
             throw new LyraNetworkException("invalid private key: " . $private_key);
         }
 
-        $this->_privateKey = $private_key;
+        $this->_privateKey = $privateKey;
         $this->_login = $auth[0];
         $this->_password = $auth[1];
-    }
-
-    public function getVersion() {
-        return Constants::SDK_VERSION;
     }
 
     public function setPublicKey($publicKey) {
@@ -52,6 +55,14 @@ class Client
 
     public function post($target, $array)
     {
+        if (!$this->_privateKey) {
+            throw new LyraNetworkException("private key not defined in the SDK");
+        }
+
+        if (!$this->_endpoint) {
+            throw new LyraNetworkException("REST API endpoint not defined in the SDK");
+        }
+
         if (extension_loaded('curl')) {
             return $this->postWithCurl($target, $array);
         } else {
@@ -131,7 +142,7 @@ class Client
 
         $response = json_decode($raw_response, true);
 
-        if (!response) {
+        if (!$response) {
             throw new Exception("Error: call to URL $url failed.");
         }
 
