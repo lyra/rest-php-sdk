@@ -1,7 +1,8 @@
 # Changelog
 
-### V3.0.4 (in progress)
+### V3.0.4 2017-01-31
 
+- Adding endpoint support
 - Add Dockerfile with unzip and composer for local tests
 
 ### v3.0.3 2017-01-30
