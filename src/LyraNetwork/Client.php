@@ -24,6 +24,10 @@ class Client
          $this->_endpoint = $endpoint;
     }
 
+    public function getEndpoint() {
+         return $this->_endpoint;
+    }
+
     public function setPrivateKey($privateKey) {
         $auth = explode(':', $privateKey);
 
@@ -71,15 +75,24 @@ class Client
         }
     }
 
+    public function getUrlFromTarget($target)
+    {
+        $url = $this->_endpoint . "/api-payment/V3/" . $target;
+        $url = preg_replace('/([^:])(\/{2,})/', '$1/', $url); 
+        
+        return $url;
+    }
+
+
     public function postWithCurl($target, $array)
     {
-        $url = $this->_endpoint . $target;
+        $url = $this->getUrlFromTarget($target);
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
         curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_USERAGENT, 'Krypton PHP SDK ' + Constants::SDK_VERSION);
+        curl_setopt($curl, CURLOPT_USERAGENT, 'Krypton PHP SDK ' . Constants::SDK_VERSION);
         curl_setopt($curl, CURLOPT_USERPWD, $this->_privateKey);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($array));
@@ -118,14 +131,14 @@ class Client
 
     public function postWithFileGetContents($target, $array)
     {
-        $url = $this->_endpoint . $target;
+        $url = $this->getUrlFromTarget($target);
 
         $http = array(
             'method'        => 'POST',
             'header'        => 'Authorization: Basic ' . base64_encode($this->_privateKey) . "\r\n".
                               'Content-Type: application/json',
             'content'       => json_encode($array),
-            'user_agent'    => 'Krypton PHP SDK fallback ' + Constants::SDK_VERSION,
+            'user_agent'    => 'Krypton PHP SDK fallback ' . Constants::SDK_VERSION,
             'timeout'       => $this->_timeout,
             'ignore_errors' => true
         );

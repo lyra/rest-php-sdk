@@ -57,8 +57,13 @@ start docker using docker compose:
 docker-compose up -d
 ````
 
+Install deps
+```sh
+docker exec -ti krypton-sdk php composer.phar install
+```
+
 and run the test suite with:
 
 ```sh
-docker exec -ti kryptonphpsdk_krypton_php_examples_1 ./vendor/bin/phpunit src/
+docker exec -ti krypton-sdk ./vendor/bin/phpunit src/
 ```
