@@ -1,6 +1,10 @@
 # Changelog
 
-### v3.0.2 2017-01-30
+### V3.0.4 (in progress)
+
+- Add Dockerfile with unzip and composer for local tests
+
+### v3.0.3 2017-01-30
 
 - Add file_get_contents fallback when CURL is not installed
 - Add CA root certificate to fix WAMP curl + https 

@@ -1,5 +1,6 @@
-krypton_php_examples:
-  image: php:7.0-apache
+krypton_sdk:
+  build: .
+  container_name:  krypton-sdk
   volumes:
     - ./:/var/www/html/
   ports:
