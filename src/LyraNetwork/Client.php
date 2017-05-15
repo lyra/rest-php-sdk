@@ -40,6 +40,14 @@ class Client
         $this->_password = $auth[1];
     }
 
+    public function setUsername($username) {
+        $this->_login = $username;
+    }
+
+    public function setPassword($password) {
+        $this->_password = $password;
+    }
+
     public function setPublicKey($publicKey) {
         $this->_publicKey = $publicKey;
     }

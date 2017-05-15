@@ -27,6 +27,24 @@ class ClientTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * ./vendor/bin/phpunit --filter testClientUsernamePasswordValidCall src/LyraNetwork/Tests/ClientTest.php
+     */
+    public function testClientUsernamePasswordValidCall()
+    {
+        $store = array("value" => "sdk test string value");
+        
+        $client = new Client();
+        $client->setPrivateKey("69876357:testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client->setUsername("69876357");
+        $client->setPassword("testprivatekey_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M");
+        $client->setEndpoint("https://secure.payzen.eu");
+        $response = $client->post('Charge/SDKTest', $store);
+
+        $this->assertEquals("SUCCESS", $response["status"]);
+        $this->assertEquals($store["value"], $response["answer"]["value"]);
+    }
+
+    /**
      * ./vendor/bin/phpunit --filter testFileGetContentsClientValidCall src/LyraNetwork/Tests/ClientTest.php
      */
     public function testFileGetContentsClientValidCall()
