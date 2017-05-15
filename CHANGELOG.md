@@ -1,6 +1,6 @@
 # Changelog
 
-### V3.0.5 2017-05-15
+### V3.0.6 2017-05-15
 
 - add setUsername and setPassword methods
 
