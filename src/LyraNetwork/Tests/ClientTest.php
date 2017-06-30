@@ -246,13 +246,4 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("ERROR", $response["status"]);
         $this->assertEquals("INT_002", $response["answer"]["errorCode"]);
     }
-
-    /**
-     * ./vendor/bin/phpunit --filter testAutoloader src/LyraNetwork/Tests/ClientTest.php
-     * Test standalone autoloader (not the composer one)
-     */
-    public function testAutoloader()
-    {
-        require(__DIR__ . '/../../autoload.php');
-    }
 }
