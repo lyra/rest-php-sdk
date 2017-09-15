@@ -1,5 +1,9 @@
 # Changelog
 
+### V3.1.0 (WORK IN PROGRESS)
+
+- version is now defined in the web-service name (use V3/Charge/SDKTest instead of Charge/SDKTest)
+
 ### V3.0.6 2017-05-15
 
 - add setUsername and setPassword methods

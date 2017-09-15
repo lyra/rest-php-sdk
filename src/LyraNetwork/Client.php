@@ -87,7 +87,7 @@ class Client
 
     public function getUrlFromTarget($target)
     {
-        $url = $this->_endpoint . "/api-payment/V3/" . $target;
+        $url = $this->_endpoint . "/api-payment/" . $target;
         $url = preg_replace('/([^:])(\/{2,})/', '$1/', $url); 
         
         return $url;
