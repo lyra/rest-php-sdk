@@ -172,4 +172,13 @@ class Client
 
         return $response;
     }
+
+    /*
+     * check POST browserRequest object signature
+     * not yet implemented
+     */
+    public function checkSignature()
+    {
+        return true;
+    }
 }

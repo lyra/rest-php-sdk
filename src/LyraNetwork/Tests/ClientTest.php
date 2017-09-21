@@ -246,4 +246,17 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("ERROR", $response["status"]);
         $this->assertEquals("INT_002", $response["answer"]["errorCode"]);
     }
+
+    /**
+     * ./vendor/bin/phpunit --filter testInvalidAnswer src/LyraNetwork/Tests/ClientTest.php
+     */
+    public function testCheckSignature()
+    {
+        $client = new Client();
+
+        /* not yet implemented */
+        $isValid = $client->checkSignature();
+
+        $this->assertTrue($isValid);
+    }
 }

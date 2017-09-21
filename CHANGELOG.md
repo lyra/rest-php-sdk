@@ -3,6 +3,7 @@
 ### V3.1.0 (WORK IN PROGRESS)
 
 - version is now defined in the web-service name (use V3/Charge/SDKTest instead of Charge/SDKTest)
+- add empty checkSignature method
 
 ### V3.0.6 2017-05-15
 
