@@ -10,6 +10,14 @@ use LyraNetwork\Constants;
  */
 class ClientTest extends PHPUnit_Framework_TestCase
 {
+    private function fakePostData()
+    {
+        $_POST['kr-hash'] = "33791304f1f5462b9bb14b039488166ed45b8187b217a986e11050985ffb036f";
+        $_POST['kr-hash-algorithm'] = "sha256";
+        $_POST['kr-answer-type'] = "V3.1\/BrowserRequest";
+        $_POST['kr-answer'] = '{"shopId":"33148340","orderCycle":"CLOSED","orderStatus":"PAID","orderDetails":{"orderTotalAmount":250,"orderCurrency":"EUR","mode":"TEST","orderId":"4146ab892f9a4cc9819c9148fc714599","_type":"V3.1\/OrderDetails"},"transactions":[{"uuid":"fd18ea76127c442b8eaa8c849ce48ae0","status":"PAID","detailedStatus":"AUTHORISED","_type":"V3.1\/BrowserRequestTransaction"}],"serverDate":"2017-11-09T08:27:01+00:00","_type":"V3.1\/BrowserRequest"}';
+    }
+
     /**
      * ./vendor/bin/phpunit --filter testClientValidCall src/LyraNetwork/Tests/ClientTest.php
      */
@@ -212,6 +220,11 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(Constants::SDK_VERSION, $client->getVersion());
         $this->assertEquals("33148340:testpublickey_l83P7WpRK2hoUIcWyFVQsd4Omsz0XbCKYtNKeGbpX6CvS", $client->getPublicKey());
         $this->assertEquals("https://secure.payzen.eu", $client->getEndpoint());
+        $this->assertEquals("https://secure.payzen.eu", $client->getClientEndpoint());
+
+        $client->setClientEndpoint("https://client.payzen.eu");
+        $this->assertEquals("https://secure.payzen.eu", $client->getEndpoint());
+        $this->assertEquals("https://client.payzen.eu", $client->getClientEndpoint());
     }
 
     /**
@@ -248,14 +261,30 @@ class ClientTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * ./vendor/bin/phpunit --filter testInvalidAnswer src/LyraNetwork/Tests/ClientTest.php
+     * ./vendor/bin/phpunit --filter testGetParsedAnswer src/LyraNetwork/Tests/ClientTest.php
+     */
+    public function testGetParsedAnswer()
+    {
+        $client = new Client();
+        $this->fakePostData();
+        $answer = $client->getParsedAnswer();
+
+        $this->assertEquals($_POST['kr-hash'], $answer['kr-hash']);
+        $this->assertEquals($_POST['kr-hash-algorithm'], $answer['kr-hash-algorithm']);
+        $this->assertEquals($_POST['kr-answer-type'], $answer['kr-answer-type']);
+        $this->assertEquals($_POST['kr-answer'], json_encode($answer['kr-answer']));
+    }
+
+    /**
+     * ./vendor/bin/phpunit --filter testCheckSignature src/LyraNetwork/Tests/ClientTest.php
      */
     public function testCheckSignature()
     {
         $client = new Client();
+        $this->fakePostData();
 
         /* not yet implemented */
-        $isValid = $client->checkSignature();
+        $isValid = $client->checkSignature("ktM7bSeTJpclvpm4eEE9N0LIyoxUvsQ9AAYbQI1xQx7Qh");
 
         $this->assertTrue($isValid);
     }

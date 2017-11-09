@@ -14,6 +14,7 @@ class Client
     private $_proxyHost = null;
     private $_proxyPort = null;
     private $_endpoint = null;
+    private $_clientEndpoint = null;
 
     public function getVersion() {
         return Constants::SDK_VERSION;
@@ -23,9 +24,18 @@ class Client
          $this->_endpoint = $endpoint;
     }
 
+    public function setClientEndpoint($clientEndpoint) {
+        $this->_clientEndpoint = $clientEndpoint;
+    }
+
     public function getEndpoint() {
          return $this->_endpoint;
     }
+
+    public function getClientEndpoint() {
+        if ($this->_clientEndpoint) return $this->_clientEndpoint;
+        return $this->_endpoint;
+   }
 
     public function setPrivateKey($privateKey) {
         $auth = explode(':', $privateKey);
@@ -173,12 +183,47 @@ class Client
         return $response;
     }
 
-    /*
+    /**
+     * Retrieve payment form answer from POST data
+     */
+    public function getParsedAnswer()
+    {
+        if (!array_key_exists("kr-hash", $_POST)) throw new Exception("kr-hash not found in POST parameters");
+        if (!array_key_exists("kr-hash-algorithm", $_POST)) throw new Exception("kr-hash-algorithm not found in POST parameters");
+        if (!array_key_exists("kr-answer-type", $_POST)) throw new Exception("kr-answer-type not found in POST parameters");
+        if (!array_key_exists("kr-answer", $_POST)) throw new Exception("kr-answer not found in POST parameters");
+
+        $answer = array();
+        $answer['kr-hash'] = $_POST['kr-hash'];
+        $answer['kr-hash-algorithm'] = $_POST['kr-hash-algorithm'];
+        $answer['kr-answer-type'] = $_POST['kr-answer-type'];
+
+        try {
+            $answer['kr-answer'] = json_decode($_POST['kr-answer']);
+        } catch(Exception $e) {
+            throw new Exception("kr-answer JSON decoding failed");
+        }
+        
+        return $answer;
+    }
+
+    /**
      * check POST browserRequest object signature
      * not yet implemented
      */
-    public function checkSignature()
+    public function checkSignature($hashKey)
     {
-        return true;
+        /* check if the hash algorithm is supported */
+        if ($_POST['kr-hash-algorithm'] != "sha256") {
+            throw new Excpetion("hash algorithm not supported:" . $_POST['kr-hash-algorithm']);
+        }
+
+        /* calculating the hash on our side */
+        $stringToHash = $_POST['kr-answer'] . "+" . $hashKey;
+        $calculatedHash = hash($_POST['kr-hash-algorithm'], $stringToHash);
+        
+        /* return true if calculated hash and sent hash are the same */
+        return true; /* WORK IN PROGRESS return ($calculatedHash == $_POST['kr-hash']); */
     }
 }
+

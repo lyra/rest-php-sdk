@@ -3,7 +3,9 @@
 ### V3.1.0 (WORK IN PROGRESS)
 
 - version is now defined in the web-service name (use V3/Charge/SDKTest instead of Charge/SDKTest)
-- add empty checkSignature method
+- add $client->checkSignature($hashKey) method to check POST data answer signature
+- add $client->getClientEndPoint() to allow to test a javascript client on a different server
+- add $client->getParsedAnswer() helper to get POST data easily 
 
 ### V3.0.6 2017-05-15
 
