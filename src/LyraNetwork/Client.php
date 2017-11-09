@@ -199,7 +199,7 @@ class Client
         $answer['kr-answer-type'] = $_POST['kr-answer-type'];
 
         try {
-            $answer['kr-answer'] = json_decode($_POST['kr-answer']);
+            $answer['kr-answer'] = json_decode($_POST['kr-answer'], true);
         } catch(Exception $e) {
             throw new Exception("kr-answer JSON decoding failed");
         }

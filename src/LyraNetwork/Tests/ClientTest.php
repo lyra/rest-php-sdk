@@ -273,6 +273,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($_POST['kr-hash-algorithm'], $answer['kr-hash-algorithm']);
         $this->assertEquals($_POST['kr-answer-type'], $answer['kr-answer-type']);
         $this->assertEquals($_POST['kr-answer'], json_encode($answer['kr-answer']));
+        $this->assertEquals("array", gettype($answer['kr-answer']));
     }
 
     /**
