@@ -261,13 +261,13 @@ class ClientTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * ./vendor/bin/phpunit --filter testGetParsedAnswer src/LyraNetwork/Tests/ClientTest.php
+     * ./vendor/bin/phpunit --filter testGetParsedFormAnswer src/LyraNetwork/Tests/ClientTest.php
      */
-    public function testGetParsedAnswer()
+    public function testGetParsedFormAnswer()
     {
         $client = new Client();
         $this->fakePostData();
-        $answer = $client->getParsedAnswer();
+        $answer = $client->getParsedFormAnswer();
 
         $this->assertEquals($_POST['kr-hash'], $answer['kr-hash']);
         $this->assertEquals($_POST['kr-hash-algorithm'], $answer['kr-hash-algorithm']);

@@ -186,7 +186,7 @@ class Client
     /**
      * Retrieve payment form answer from POST data
      */
-    public function getParsedAnswer()
+    public function getParsedFormAnswer()
     {
         if (!array_key_exists("kr-hash", $_POST)) throw new Exception("kr-hash not found in POST parameters");
         if (!array_key_exists("kr-hash-algorithm", $_POST)) throw new Exception("kr-hash-algorithm not found in POST parameters");
