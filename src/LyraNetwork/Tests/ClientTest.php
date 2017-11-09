@@ -277,16 +277,18 @@ class ClientTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * ./vendor/bin/phpunit --filter testCheckSignature src/LyraNetwork/Tests/ClientTest.php
+     * ./vendor/bin/phpunit --filter testCheckHash src/LyraNetwork/Tests/ClientTest.php
      */
-    public function testCheckSignature()
+    public function testCheckHash()
     {
         $client = new Client();
         $this->fakePostData();
+        $this->assertNull($client->getLastCalculatedHash());
 
         /* not yet implemented */
-        $isValid = $client->checkSignature("ktM7bSeTJpclvpm4eEE9N0LIyoxUvsQ9AAYbQI1xQx7Qh");
+        $isValid = $client->checkHash("ktM7bSeTJpclvpm4eEE9N0LIyoxUvsQ9AAYbQI1xQx7Qh");
 
         $this->assertTrue($isValid);
+        $this->assertNotNull($client->getLastCalculatedHash());
     }
 }

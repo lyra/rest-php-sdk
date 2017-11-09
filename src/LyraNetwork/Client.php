@@ -15,6 +15,7 @@ class Client
     private $_proxyPort = null;
     private $_endpoint = null;
     private $_clientEndpoint = null;
+    private $_lastCalculatedHash = null;
 
     public function getVersion() {
         return Constants::SDK_VERSION;
@@ -208,10 +209,17 @@ class Client
     }
 
     /**
-     * check POST browserRequest object signature
-     * not yet implemented
+     * retrieve the last calculated hash
      */
-    public function checkSignature($hashKey)
+    public function getLastCalculatedHash()
+    {
+        return $this->_lastCalculatedHash;
+    }
+
+    /**
+     * check kr-answer object signature
+     */
+    public function checkHash($hashKey)
     {
         /* check if the hash algorithm is supported */
         if ($_POST['kr-hash-algorithm'] != "sha256") {
@@ -221,6 +229,7 @@ class Client
         /* calculating the hash on our side */
         $stringToHash = $_POST['kr-answer'] . "+" . $hashKey;
         $calculatedHash = hash($_POST['kr-hash-algorithm'], $stringToHash);
+        $this->_lastCalculatedHash = $calculatedHash;
         
         /* return true if calculated hash and sent hash are the same */
         return true; /* WORK IN PROGRESS return ($calculatedHash == $_POST['kr-hash']); */
