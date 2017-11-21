@@ -7,6 +7,7 @@
 - add $client->getLastCalculatedHash() get the last calculated hash by checkHash()
 - add $client->getClientEndPoint() to allow to test a javascript client on a different server
 - add $client->getParsedAnswer() helper to get POST data easily 
+- composer ext-curl deps moved to suggest, refs #2
 
 ### V3.0.6 2017-05-15
 
