@@ -230,9 +230,9 @@ class Client
         $stringToHash = $_POST['kr-answer'] . "+" . $hashKey;
         $calculatedHash = hash($_POST['kr-hash-algorithm'], $stringToHash);
         $this->_lastCalculatedHash = $calculatedHash;
-        
+
         /* return true if calculated hash and sent hash are the same */
-        return true; /* WORK IN PROGRESS return ($calculatedHash == $_POST['kr-hash']); */
+        return ($calculatedHash == $_POST['kr-hash']);
     }
 }
 

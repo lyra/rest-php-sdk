@@ -68,3 +68,6 @@ and run the test suite with:
 docker exec -ti krypton-sdk ./vendor/bin/phpunit src/
 ```
 
+## License
+
+This project is licensed under [MIT License](http://en.wikipedia.org/wiki/MIT_License)

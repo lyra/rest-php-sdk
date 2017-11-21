@@ -12,10 +12,10 @@ class ClientTest extends PHPUnit_Framework_TestCase
 {
     private function fakePostData()
     {
-        $_POST['kr-hash'] = "33791304f1f5462b9bb14b039488166ed45b8187b217a986e11050985ffb036f";
+        $_POST['kr-hash'] = "6ad18cd5bd4cf8b2a265c283c3a829dd58fea0db032e3f73ae670f74e1f4c7dc";
         $_POST['kr-hash-algorithm'] = "sha256";
         $_POST['kr-answer-type'] = "V3.1\/BrowserRequest";
-        $_POST['kr-answer'] = '{"shopId":"33148340","orderCycle":"CLOSED","orderStatus":"PAID","orderDetails":{"orderTotalAmount":250,"orderCurrency":"EUR","mode":"TEST","orderId":"4146ab892f9a4cc9819c9148fc714599","_type":"V3.1\/OrderDetails"},"transactions":[{"uuid":"fd18ea76127c442b8eaa8c849ce48ae0","status":"PAID","detailedStatus":"AUTHORISED","_type":"V3.1\/BrowserRequestTransaction"}],"serverDate":"2017-11-09T08:27:01+00:00","_type":"V3.1\/BrowserRequest"}';
+        $_POST['kr-answer'] = '{"shopId":"33148340","orderCycle":"CLOSED","orderStatus":"PAID","orderDetails":{"orderTotalAmount":399,"orderCurrency":"EUR","mode":"TEST","orderId":"446cedc74e404af2ace4ecb4c64513fa","_type":"V3.1/OrderDetails"},"transactions":[{"uuid":"9b7ad826931542198131fd939cf88816","status":"PAID","detailedStatus":"AUTHORISED","_type":"V3.1/BrowserRequestTransaction"}],"serverDate":"2017-11-09T15:33:49+00:00","_type":"V3.1/BrowserRequest"}';
     }
 
     /**
@@ -272,7 +272,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($_POST['kr-hash'], $answer['kr-hash']);
         $this->assertEquals($_POST['kr-hash-algorithm'], $answer['kr-hash-algorithm']);
         $this->assertEquals($_POST['kr-answer-type'], $answer['kr-answer-type']);
-        $this->assertEquals($_POST['kr-answer'], json_encode($answer['kr-answer']));
+        $this->assertEquals($_POST['kr-answer'], json_encode($answer['kr-answer'], JSON_UNESCAPED_SLASHES));
         $this->assertEquals("array", gettype($answer['kr-answer']));
     }
 
