@@ -272,7 +272,12 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($_POST['kr-hash'], $answer['kr-hash']);
         $this->assertEquals($_POST['kr-hash-algorithm'], $answer['kr-hash-algorithm']);
         $this->assertEquals($_POST['kr-answer-type'], $answer['kr-answer-type']);
-        $this->assertEquals($_POST['kr-answer'], json_encode($answer['kr-answer'], JSON_UNESCAPED_SLASHES));
+
+        $rebuild_string_answer = json_encode($answer['kr-answer']);
+        /* php 5.3.3 does not support JSON_UNESCAPED_SLASHES */
+        $rebuild_string_answer = str_replace('\/', '/', $rebuild_string_answer);
+
+        $this->assertEquals($_POST['kr-answer'], $rebuild_string_answer);
         $this->assertEquals("array", gettype($answer['kr-answer']));
     }
 
