@@ -19,13 +19,13 @@ PHP 5.3.3 and later.
 Lyra Network REST api SDK is available via [Composer/Packagist](https://packagist.org/packages/lyranetwork/krypton-php-sdk). Just add this line to your `composer.json` file:
 
 ```json
-"lyranetwork/krypton-php-sdk": "~3.0"
+"lyranetwork/krypton-php-sdk": "~3.1"
 ```
 
 or
 
 ```sh
-composer require lyranetwork/krypton-php-sdk:~3.0
+composer require lyranetwork/krypton-php-sdk:~3.1
 ```
 
 To use the SDK, use Composer's [autoload](https://getcomposer.org/doc/00-intro.md#autoloading):

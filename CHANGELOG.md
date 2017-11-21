@@ -1,6 +1,11 @@
 # Changelog
 
-### V3.1.0 (WORK IN PROGRESS)
+### 3.1.0 2017-11-21
+
+New SDK version for the new 3.1 web-services.
+Still compatible with 3.0 doing minor changes.
+
+It's a release candidate.
 
 - version is now defined in the web-service name (use V3/Charge/SDKTest instead of Charge/SDKTest)
 - add $client->checkHash($hashKey) method to check POST data answer signature
