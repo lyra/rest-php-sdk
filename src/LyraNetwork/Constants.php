@@ -3,5 +3,5 @@ namespace LyraNetwork;
 
 class Constants
 {
-    const SDK_VERSION = '3.1.0';
+    const SDK_VERSION = '3.1.1';
 }
