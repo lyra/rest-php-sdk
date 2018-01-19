@@ -172,13 +172,13 @@ class Client
         $raw_response = file_get_contents($url, false, $context);
 
         if (!$raw_response) {
-            throw new Exception("Error: call to URL $url failed.");
+            throw new LyraNetworkException("Error: call to URL $url failed.");
         }
 
         $response = json_decode($raw_response, true);
 
         if (!$response) {
-            throw new Exception("Error: call to URL $url failed.");
+            throw new LyraNetworkException("Error: call to URL $url failed.");
         }
 
         return $response;
@@ -189,10 +189,10 @@ class Client
      */
     public function getParsedFormAnswer()
     {
-        if (!array_key_exists("kr-hash", $_POST)) throw new Exception("kr-hash not found in POST parameters");
-        if (!array_key_exists("kr-hash-algorithm", $_POST)) throw new Exception("kr-hash-algorithm not found in POST parameters");
-        if (!array_key_exists("kr-answer-type", $_POST)) throw new Exception("kr-answer-type not found in POST parameters");
-        if (!array_key_exists("kr-answer", $_POST)) throw new Exception("kr-answer not found in POST parameters");
+        if (!array_key_exists("kr-hash", $_POST)) throw new LyraNetworkException("kr-hash not found in POST parameters");
+        if (!array_key_exists("kr-hash-algorithm", $_POST)) throw new LyraNetworkException("kr-hash-algorithm not found in POST parameters");
+        if (!array_key_exists("kr-answer-type", $_POST)) throw new LyraNetworkException("kr-answer-type not found in POST parameters");
+        if (!array_key_exists("kr-answer", $_POST)) throw new LyraNetworkException("kr-answer not found in POST parameters");
 
         $answer = array();
         $answer['kr-hash'] = $_POST['kr-hash'];
@@ -202,7 +202,7 @@ class Client
         try {
             $answer['kr-answer'] = json_decode($_POST['kr-answer'], true);
         } catch(Exception $e) {
-            throw new Exception("kr-answer JSON decoding failed");
+            throw new LyraNetworkException("kr-answer JSON decoding failed");
         }
         
         return $answer;
@@ -223,7 +223,7 @@ class Client
     {
         /* check if the hash algorithm is supported */
         if ($_POST['kr-hash-algorithm'] != "sha256") {
-            throw new Excpetion("hash algorithm not supported:" . $_POST['kr-hash-algorithm']);
+            throw new LyraNetworkException("hash algorithm not supported:" . $_POST['kr-hash-algorithm']);
         }
 
         /* calculating the hash on our side */
@@ -235,4 +235,3 @@ class Client
         return ($calculatedHash == $_POST['kr-hash']);
     }
 }
-
