@@ -239,6 +239,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         Client::setDefaultClientEndpoint("https://client.payzen.eu");
 
         $client = new Client();
+        $store = array("value" => "sdk test string value");
         $response = $client->post('V3/Charge/SDKTest', $store);
 
         $this->assertEquals("SUCCESS", $response["status"]);
