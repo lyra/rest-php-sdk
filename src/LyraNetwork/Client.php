@@ -6,6 +6,14 @@ use LyraNetwork\Constants;
 
 class Client
 {
+    private static $_defaultUsername = null;
+    private static $_defaultPassword = null;
+    private static $_defaultPublicKey = null;
+    private static $_defaultProxyHost = null;
+    private static $_defaultProxyPort = null;
+    private static $_defaultEndpoint = null;
+    private static $_defaultClientEndpoint = null;
+
     private $_username = null;
     private $_password = null;
     private $_publicKey = null;
@@ -17,20 +25,49 @@ class Client
     private $_clientEndpoint = null;
     private $_lastCalculatedHash = null;
 
+    public function __construct() {
+        /* Assign default values */
+        $this->_username = self::$_defaultUsername;
+        $this->_password = self::$_defaultPassword;
+        $this->_publicKey = self::$_defaultPublicKey;
+        $this->_proxyHost = self::$_defaultProxyHost;
+        $this->_proxyPort = self::$_defaultProxyPort;
+        $this->_endpoint = self::$_defaultEndpoint;
+        $this->_clientEndpoint = self::$_defaultClientEndpoint;
+    }
+
+    public static function resetDefaultConfiguration() {
+        self::$_defaultUsername = null;
+        self::$_defaultPassword = null;
+        self::$_defaultPublicKey = null;
+        self::$_defaultProxyHost = null;
+        self::$_defaultProxyPort = null;
+        self::$_defaultEndpoint = null;
+        self::$_defaultClientEndpoint = null;
+    }
+
     public function getVersion() {
         return Constants::SDK_VERSION;
+    }
+
+    public static function setDefaultEndpoint($endpoint) {
+        static::$_defaultEndpoint = $endpoint;
     }
 
     public function setEndpoint($endpoint) {
          $this->_endpoint = $endpoint;
     }
 
-    public function setClientEndpoint($clientEndpoint) {
-        $this->_clientEndpoint = $clientEndpoint;
+    public function getEndpoint() {
+        return $this->_endpoint;
     }
 
-    public function getEndpoint() {
-         return $this->_endpoint;
+    public static function setDefaultClientEndpoint($clientEndpoint) {
+        static::$_defaultClientEndpoint = $clientEndpoint;
+    }
+
+    public function setClientEndpoint($clientEndpoint) {
+        $this->_clientEndpoint = $clientEndpoint;
     }
 
     public function getClientEndpoint() {
@@ -49,12 +86,32 @@ class Client
         $this->_password = $auth[1];
     }
 
+    public static function setDefaultUsername($defaultUsername) {
+        self::$_defaultUsername = $defaultUsername;
+    }
+
     public function setUsername($username) {
         $this->_username = $username;
     }
 
+    public function getUsername() {
+        return $this->_username;
+    }
+
+    public static function setDefaultPassword($defaultPassword) {
+        self::$_defaultPassword = $defaultPassword;
+    }
+
     public function setPassword($password) {
         $this->_password = $password;
+    }
+
+    public function getPassword() {
+        return $this->_password;
+    }
+
+    public static function setDefaultPublicKey($defaultPublicKey) {
+        self::$_defaultPublicKey = $defaultPublicKey;
     }
 
     public function setPublicKey($publicKey) {
@@ -65,9 +122,22 @@ class Client
         return $this->_publicKey;
     }
 
+    public static function setDefaultProxy($defaultHost, $defaultPort) {
+        self::$_defaultProxyHost = $defaultHost;
+        self::$_defaultProxyPort = $defaultPort;
+    }
+
     public function setProxy($host, $port) {
         $this->_proxyHost = $host;
         $this->_proxyPort = $port;
+    }
+
+    public function getProxyHost() {
+        return $this->_proxyHost;
+    }
+
+    public function getProxyPort() {
+        return $this->_proxyPort;
     }
 
     public function setTimeOuts($connectionTimeout, $timeout) {
