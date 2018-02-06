@@ -14,7 +14,7 @@ Lyra Network REST API SDK.
 
 PHP 5.3.3 and later.
 
-## Installation
+## Installation
 
 Lyra Network REST api SDK is available via [Composer/Packagist](https://packagist.org/packages/lyranetwork/krypton-php-sdk). Just add this line to your `composer.json` file:
 
