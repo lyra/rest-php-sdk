@@ -1,5 +1,12 @@
 # Changelog
 
+### master
+
+- add default static configuration method in Client.php (Client::setDefault*() methods)
+- add getUsername(), getPassword(), getProxyPort() and getProxyHost() to Client.php
+- change docker container name from krypton-sdk to krypton-php-sdk
+- adding PHP 7.2 Travis tests
+
 ### 3.1.1 2018-01-19
 
 - Change Expcetion to LyraNetworkException in client.php
