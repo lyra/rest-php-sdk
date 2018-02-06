@@ -237,6 +237,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         Client::setDefaultPublicKey("69876357:testpublickey_DEMOPUBLICKEY95me92597fd28tGD4r5");
         Client::setDefaultEndpoint("https://secure.payzen.eu");
         Client::setDefaultClientEndpoint("https://client.payzen.eu");
+        Client::setdefaultSHA256Key("38453613e7f44dc58732bad3dca2bca3");
 
         $client = new Client();
         $store = array("value" => "sdk test string value");
@@ -251,6 +252,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("testpassword_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M", $client->getPassword());
         $this->assertEquals("https://secure.payzen.eu", $client->getEndpoint());
         $this->assertEquals("https://client.payzen.eu", $client->getClientEndpoint());
+        $this->assertEquals("38453613e7f44dc58732bad3dca2bca3", $client->getSHA256Key());
         $this->assertEquals(null, $client->getProxyHost());
         $this->assertEquals(null, $client->getProxyPort());
 
@@ -267,6 +269,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $client->getPassword());
         $this->assertEquals(null, $client->getEndpoint());
         $this->assertEquals(null, $client->getClientEndpoint());
+        $this->assertEquals(null, $client->getSHA256Key());
         $this->assertEquals(null, $client->getProxyHost());
         $this->assertEquals(null, $client->getProxyPort());
     }
@@ -336,8 +339,8 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->fakePostData();
         $this->assertNull($client->getLastCalculatedHash());
 
-        /* not yet implemented */
-        $isValid = $client->checkHash("ktM7bSeTJpclvpm4eEE9N0LIyoxUvsQ9AAYbQI1xQx7Qh");
+        $client->setSHA256Key("ktM7bSeTJpclvpm4eEE9N0LIyoxUvsQ9AAYbQI1xQx7Qh");
+        $isValid = $client->checkHash();
 
         $this->assertTrue($isValid);
         $this->assertNotNull($client->getLastCalculatedHash());

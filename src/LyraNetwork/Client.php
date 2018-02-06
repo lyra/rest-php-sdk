@@ -13,6 +13,8 @@ class Client
     private static $_defaultProxyPort = null;
     private static $_defaultEndpoint = null;
     private static $_defaultClientEndpoint = null;
+    private static $_defaultHashKey = null;
+    private static $_defaultHashAlgorithm = null;
 
     private $_username = null;
     private $_password = null;
@@ -23,6 +25,8 @@ class Client
     private $_proxyPort = null;
     private $_endpoint = null;
     private $_clientEndpoint = null;
+    private $_hashKey = null;
+    private $_hashAlgorithm = null;
     private $_lastCalculatedHash = null;
 
     public function __construct() {
@@ -34,6 +38,8 @@ class Client
         $this->_proxyPort = self::$_defaultProxyPort;
         $this->_endpoint = self::$_defaultEndpoint;
         $this->_clientEndpoint = self::$_defaultClientEndpoint;
+        $this->_hashKey = self::$_defaultHashKey;
+        $this->_hashAlgorithm = self::$_defaultHashAlgorithm;
     }
 
     public static function resetDefaultConfiguration() {
@@ -44,6 +50,8 @@ class Client
         self::$_defaultProxyPort = null;
         self::$_defaultEndpoint = null;
         self::$_defaultClientEndpoint = null;
+        self::$_defaultHashKey = null;
+        self::$_defaultHashAlgorithm = null;
     }
 
     public function getVersion() {
@@ -74,6 +82,20 @@ class Client
         if ($this->_clientEndpoint) return $this->_clientEndpoint;
         return $this->_endpoint;
    }
+
+    public static function setdefaultSHA256Key($defaultHashKey) {
+        static::$_defaultHashKey = $defaultHashKey;
+        static::$_defaultHashAlgorithm = "sha256";
+    }
+
+    public function setSHA256Key($hashKey) {
+        $this->_hashKey = $hashKey;
+        $this->_hashAlgorithm = "sha256";
+    }
+
+    public function getSHA256Key() {
+        return $this->_hashKey;
+}
 
     public function setPrivateKey($privateKey) {
         $auth = explode(':', $privateKey);
@@ -288,12 +310,27 @@ class Client
 
     /**
      * check kr-answer object signature
+     * work for both browser and IPN check
      */
-    public function checkHash($hashKey)
+    public function checkHash()
     {
         /* check if the hash algorithm is supported */
-        if ($_POST['kr-hash-algorithm'] != "sha256") {
+        if ($_POST['kr-hash-algorithm'] != $this->_hashAlgorithm) {
             throw new LyraNetworkException("hash algorithm not supported:" . $_POST['kr-hash-algorithm']);
+        }
+
+        /* on some servers, kr-answer-type can be escaped */
+        $krAnswerType = str_replace('\/', '/', $_POST['kr-answer-type']);
+
+        /* choose the right key to use the check the signature */
+        if ($krAnswerType == "V3.1/BrowserRequest") {
+            /* answer from web-browser, we use the SHA256 key */
+            $hashKey = $this->getSHA256Key();
+        } elseif ($krAnswerType == "V3.1/IPNRequest") {
+            /* answer from IPN, we use the password as key */
+            $hashKey = $this->getPassword();
+        } else {
+            throw new LyraNetworkException("answer type not supported:" . $krAnswerType);
         }
 
         /* calculating the hash on our side */
