@@ -1,6 +1,6 @@
 # Changelog
 
-### master
+### 3.1.2 2018-02-08
 
 - add setDefaultSHA256Key(), setSHA256Key() and getSHA256Key() to Client.php
 - add default static configuration method to Client.php (Client::setDefault*() methods)
