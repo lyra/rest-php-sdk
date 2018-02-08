@@ -7,6 +7,7 @@
 - add getUsername(), getPassword(), getProxyPort() and getProxyHost() to Client.php
 - change docker container name from krypton-sdk to krypton-php-sdk
 - adding PHP 7.2 Travis tests
+- Add default version (V3) to url without any versions
 
 ### 3.1.1 2018-01-19
 
