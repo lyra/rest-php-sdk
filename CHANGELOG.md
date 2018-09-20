@@ -1,6 +1,6 @@
 # Changelog
 
-### 4.0.0 Work in progress
+### 4.0.0 2018-09-19
 
 - Remove V3.0 support (fallback and sha signature checks)
 - remove deprecated Client->setPrivateKey() fuonction
