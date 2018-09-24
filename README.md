@@ -19,13 +19,13 @@ PHP 5.4.0 and later.
 Lyra Network REST api SDK is available via [Composer/Packagist](https://packagist.org/packages/lyracom/rest-php-sdk). Just add this line to your `composer.json` file:
 
 ```json
-"lyra/krypton-php-sdk": "4.0.*"
+"lyracom/rest-php-sdk": "4.0.*"
 ```
 
 or
 
 ```sh
-composer require lyra/krypton-php-sdk:4.0.*
+composer require lyracom/rest-php-sdk:4.0.*
 ```
 
 To use the SDK, use Composer's [autoload](https://getcomposer.org/doc/00-intro.md#autoloading):
@@ -45,9 +45,9 @@ require_once('/path/to/php-sdk/autoload.php');
 
 ## SDK Usage
 
-A simple integration example is [available here](https://github.com/LyraNetwork/krypton-php-examples/blob/master/src/SDKTest.php)
+A simple integration example is [available here](https://github.com/lyra/rest-php-examples/blob/master/src/SDKTest.php)
 
-You can also take a look to our github examples repository: https://github.com/LyraNetwork/krypton-php-examples
+You can also take a look to our github examples repository: https://github.com/lyra/rest-php-examples
 
 ## Run tests
 
@@ -59,13 +59,13 @@ docker-compose up -d
 
 Install deps
 ```sh
-docker exec -ti krypton-php-sdk composer install
+docker exec -ti lyra-php-api-sdk composer install
 ```
 
 and run the test suite with:
 
 ```sh
-docker exec -ti krypton-php-sdk ./vendor/bin/phpunit src/
+docker exec -ti lyra-php-api-sdk ./vendor/bin/phpunit src/
 ```
 
 ## License

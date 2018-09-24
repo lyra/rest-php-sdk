@@ -1,10 +1,9 @@
 # Changelog
 
-### master
+### 4.0.1 2018-09-24
 
 - rename composer name to lyracom/rest-php-sdk
 - moved to lyra/rest-php-sdk github repository
-
 
 ### 4.0.0 2018-09-19
 
