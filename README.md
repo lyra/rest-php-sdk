@@ -3,10 +3,10 @@
 
 [![Build Status](https://travis-ci.org/lyra/rest-php-sdk.svg?branch=master)](https://travis-ci.org/lyra/rest-php-sdk)
 [![Coverage Status](https://coveralls.io/repos/github/lyra/rest-php-sdk/badge.svg?branch=master)](https://coveralls.io/github/lyra/rest-php-sdk?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/LyraNetwork/krypton-php-sdk/v/stable)](https://packagist.org/packages/lyracom/rest-php-sdk)
-[![Latest Unstable Version](https://poser.pugx.org/LyraNetwork/krypton-php-sdk/v/unstable)](//packagist.org/packages/LyraNetwork/krypton-php-sdk)
-[![Total Downloads](https://poser.pugx.org/LyraNetwork/krypton-php-sdk/downloads)](https://packagist.org/packages/LyraNetwork/krypton-php-sdk)
-[![License](https://poser.pugx.org/LyraNetwork/krypton-php-sdk/license)](https://packagist.org/packages/LyraNetwork/krypton-php-sdk)
+[![Latest Stable Version](https://poser.pugx.org/lyracom/rest-php-sdk/v/stable)](https://packagist.org/packages/lyracom/rest-php-sdk)
+[![Latest Unstable Version](https://poser.pugx.org/lyracom/rest-php-sdk/v/unstable)](//packagist.org/packages/lyracom/rest-php-sdk)
+[![Total Downloads](https://poser.pugx.org/lyracom/rest-php-sdk/downloads)](https://packagist.org/packages/lyracom/rest-php-sdk)
+[![License](https://poser.pugx.org/lyracom/rest-php-sdk/license)](https://packagist.org/packages/lyracom/rest-php-sdk)
 
 Lyra Network REST API SDK.
 
@@ -16,7 +16,7 @@ PHP 5.4.0 and later.
 
 ## Installation
 
-Lyra Network REST api SDK is available via [Composer/Packagist](https://packagist.org/packages/LyraNetwork/krypton-php-sdk). Just add this line to your `composer.json` file:
+Lyra Network REST api SDK is available via [Composer/Packagist](https://packagist.org/packages/lyracom/rest-php-sdk). Just add this line to your `composer.json` file:
 
 ```json
 "lyra/krypton-php-sdk": "4.0.*"
@@ -36,7 +36,7 @@ require_once('vendor/autoload.php');
 
 ## Manual Installation
 
-If you do not want to use Composer, you can download the [latest release from github](https://github.com/LyraNetwork/krypton-php-sdk/releases). 
+If you do not want to use Composer, you can download the [latest release from github](https://github.com/lyra/rest-php-sdk/releases). 
 To use the SDK, include the `autoload.php` file:
 
 ```php
