@@ -1,9 +1,9 @@
 # Lyra Network REST api SDK
 
 
-[![Build Status](https://travis-ci.org/LyraNetwork/krypton-php-sdk.svg?branch=master)](https://travis-ci.org/LyraNetwork/krypton-php-sdk)
-[![Coverage Status](https://coveralls.io/repos/github/LyraNetwork/krypton-php-sdk/badge.svg?branch=master)](https://coveralls.io/github/LyraNetwork/krypton-php-sdk?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/LyraNetwork/krypton-php-sdk/v/stable)](https://packagist.org/packages/LyraNetwork/krypton-php-sdk)
+[![Build Status](https://travis-ci.org/lyra/rest-php-sdk.svg?branch=master)](https://travis-ci.org/lyra/rest-php-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/lyra/rest-php-sdk/badge.svg?branch=master)](https://coveralls.io/github/lyra/rest-php-sdk?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/LyraNetwork/krypton-php-sdk/v/stable)](https://packagist.org/packages/lyracom/rest-php-sdk)
 [![Latest Unstable Version](https://poser.pugx.org/LyraNetwork/krypton-php-sdk/v/unstable)](//packagist.org/packages/LyraNetwork/krypton-php-sdk)
 [![Total Downloads](https://poser.pugx.org/LyraNetwork/krypton-php-sdk/downloads)](https://packagist.org/packages/LyraNetwork/krypton-php-sdk)
 [![License](https://poser.pugx.org/LyraNetwork/krypton-php-sdk/license)](https://packagist.org/packages/LyraNetwork/krypton-php-sdk)
