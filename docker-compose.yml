@@ -1,6 +1,6 @@
 krypton_sdk:
   build: .
-  container_name:  krypton-php-sdk
+  container_name:  lyra-php-sdk
   volumes:
     - ./:/var/www/html/
   ports:
