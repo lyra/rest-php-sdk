@@ -1,5 +1,11 @@
 # Changelog
 
+### master
+
+- Throw an erro when getParsedFormAnswer failed
+- getParsedFormAnswer works with escaped POST values
+- checkHash works with escaped POST values
+
 ### 4.0.2 2018-12-11
 
 - Client->checkHash() automatic hash key lookup from kr-hash-key

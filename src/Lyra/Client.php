@@ -273,11 +273,13 @@ class Client
         $answer['kr-hash'] = $_POST['kr-hash'];
         $answer['kr-hash-algorithm'] = $_POST['kr-hash-algorithm'];
         $answer['kr-answer-type'] = $_POST['kr-answer-type'];
+        $answer['kr-answer'] = json_decode($_POST['kr-answer'], true);
 
-        try {
-            $answer['kr-answer'] = json_decode($_POST['kr-answer'], true);
-        } catch(Exception $e) {
-            throw new LyraException("kr-answer JSON decoding failed");
+        if (is_null($answer['kr-answer'])) {
+            $answer['kr-answer'] = json_decode(stripslashes($_POST['kr-answer']), true);
+            if (is_null($answer['kr-answer'])) {
+                throw new LyraException("kr-answer JSON decoding failed: " . json_last_error() . ":" . json_last_error_msg());
+            }
         }
         
         return $answer;
@@ -321,6 +323,11 @@ class Client
         $this->_lastCalculatedHash = $calculatedHash;
 
         /* return true if calculated hash and sent hash are the same */
+        if ($calculatedHash == $_POST['kr-hash']) return TRUE;
+
+        /* some setup has some escaped chars */
+        $calculatedHash = hash_hmac('sha256', stripslashes($krAnswer), $key);
+        $this->_lastCalculatedHash = $calculatedHash;
         return ($calculatedHash == $_POST['kr-hash']);
     }
 }
