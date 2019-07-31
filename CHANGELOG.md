@@ -1,6 +1,6 @@
 # Changelog
 
-### master
+### 4.0.3 2019-07-31
 
 - Throw an erro when getParsedFormAnswer failed
 - getParsedFormAnswer works with escaped POST values
