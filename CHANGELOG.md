@@ -1,5 +1,9 @@
 # Changelog
 
+### master
+
+- do not use json_last_error, json_last_error_msg with PHP 5.4
+
 ### 4.0.3 2019-07-31
 
 - Throw an erro when getParsedFormAnswer failed

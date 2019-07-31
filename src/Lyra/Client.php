@@ -278,7 +278,13 @@ class Client
         if (is_null($answer['kr-answer'])) {
             $answer['kr-answer'] = json_decode(stripslashes($_POST['kr-answer']), true);
             if (is_null($answer['kr-answer'])) {
-                throw new LyraException("kr-answer JSON decoding failed: " . json_last_error() . ":" . json_last_error_msg());
+                if (substr(phpversion(),0 ,3) == '5.4' ) {
+                    /* PHP 5.4 does not supprt json_last_* methodes */
+                    $errorMessage ="kr-answer JSON decoding failed";
+                } else {
+                    $errorMessage ="kr-answer JSON decoding failed: " . json_last_error() . ":" . json_last_error_msg();
+                }
+                throw new LyraException($errorMessage);
             }
         }
         

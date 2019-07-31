@@ -22,7 +22,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         return $credentials;
     }
 
-    private function fakePostData($hashKey, $ecape=FALSE)
+    private function fakePostData($hashKey, $escaped=FALSE)
     {
         if ($hashKey == "sha256_hmac_php53") {
             $_POST['kr-hash'] = "4d57a308d7d8a89a989e8dc54613fe5f7d353a6c749a9769f5e9b9073d5720af";
@@ -44,7 +44,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
             $_POST['kr-answer'] = '{"shopId":"69876357","orderCycle":"CLOSED","orderStatus":"PAID","serverDate":"2018-12-11T19:09:32+00:00","orderDetails":{"orderTotalAmount":990,"orderCurrency":"EUR","mode":"TEST","orderId":"myOrderId-618776","_type":"V4/OrderDetails"},"customer":{"billingDetails":{"address":null,"category":null,"cellPhoneNumber":null,"city":null,"country":null,"district":null,"firstName":null,"identityCode":null,"language":"FR","lastName":null,"phoneNumber":null,"state":null,"streetNumber":null,"title":null,"zipCode":null,"_type":"V4/Customer/BillingDetails"},"email":"sample@example.com","reference":null,"shippingDetails":{"address":null,"address2":null,"category":null,"city":null,"country":null,"deliveryCompanyName":null,"district":null,"firstName":null,"identityCode":null,"lastName":null,"legalName":null,"phoneNumber":null,"shippingMethod":null,"shippingSpeed":null,"state":null,"streetNumber":null,"zipCode":null,"_type":"V4/Customer/ShippingDetails"},"extraDetails":{"browserAccept":null,"fingerPrintId":null,"ipAddress":"90.71.64.161","browserUserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36","_type":"V4/Customer/ExtraDetails"},"shoppingCart":{"insuranceAmount":null,"shippingAmount":null,"taxAmount":null,"cartItemInfo":null,"_type":"V4/Customer/ShoppingCart"},"_type":"V4/Customer/Customer"},"transactions":[{"shopId":"69876357","uuid":"017574bda28e4f1d8413b97fc65c8197","amount":990,"currency":"EUR","paymentMethodType":"CARD","paymentMethodToken":null,"status":"PAID","detailedStatus":"AUTHORISED","operationType":"DEBIT","effectiveStrongAuthentication":"DISABLED","creationDate":"2018-12-11T19:09:32+00:00","errorCode":null,"errorMessage":null,"detailedErrorCode":null,"detailedErrorMessage":null,"metadata":null,"transactionDetails":{"liabilityShift":"NO","effectiveAmount":990,"effectiveCurrency":"EUR","creationContext":"CHARGE","cardDetails":{"paymentSource":"EC","manualValidation":"NO","expectedCaptureDate":"2018-12-11T19:09:32+00:00","effectiveBrand":"CB","pan":"497010XXXXXX0055","expiryMonth":11,"expiryYear":2021,"country":"FR","emisorCode":null,"effectiveProductCode":"F","legacyTransId":"908967","legacyTransDate":"2018-12-11T19:09:26+00:00","paymentMethodSource":"NEW","authorizationResponse":{"amount":990,"currency":"EUR","authorizationDate":"2018-12-11T19:09:32+00:00","authorizationNumber":"3fd0e3","authorizationResult":"0","authorizationMode":"FULL","_type":"V4/PaymentMethod/Details/Cards/CardAuthorizationResponse"},"captureResponse":{"refundAmount":null,"captureDate":null,"captureFileNumber":null,"refundCurrency":null,"_type":"V4/PaymentMethod/Details/Cards/CardCaptureResponse"},"threeDSResponse":{"authenticationResultData":{"transactionCondition":"COND_3D_ERROR","enrolled":"UNKNOWN","status":"UNKNOWN","eci":null,"xid":null,"cavvAlgorithm":null,"cavv":null,"signValid":null,"brand":"VISA","_type":"V4/PaymentMethod/Details/Cards/CardAuthenticationResponse"},"_type":"V4/PaymentMethod/Details/Cards/ThreeDSResponse"},"markAuthorizationResponse":{"amount":null,"currency":null,"authorizationDate":null,"authorizationNumber":null,"authorizationResult":null,"_type":"V4/PaymentMethod/Details/Cards/MarkAuthorizationResponse"},"_type":"V4/PaymentMethod/Details/CardDetails"},"fraudManagement":null,"parentTransactionUuid":null,"mid":"6969696","sequenceNumber":1,"additionalFields":{"installmentNumber":null,"_type":"V4/PaymentMethod/Details/AdditionalFields"},"_type":"V4/TransactionDetails"},"_type":"V4/PaymentTransaction"}],"_type":"V4/Payment"}';
         }
 
-        if ($escape) $_POST['kr-answer'] = str_replace('"', '\"', $_POST['kr-answer']);
+        if (!is_null($escaped)) $_POST['kr-answer'] = str_replace('"', '\"', $_POST['kr-answer']);
     }
 
     /**
@@ -377,7 +377,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $rebuild_string_answer = json_encode($answer['kr-answer']);
         /* php 5.3.3 does not support JSON_UNESCAPED_SLASHES */
 
-        $this->assertEquals($_POST['kr-answer'], $rebuild_string_answer);
+        if (is_null($escaped)) {
+            $this->assertEquals($_POST['kr-answer'], $rebuild_string_answer);
+        }
         $this->assertEquals("array", gettype($answer['kr-answer']));
     }
 
@@ -405,22 +407,21 @@ class ClientTest extends PHPUnit_Framework_TestCase
     /**
      * ./vendor/bin/phpunit --filter testCheckManualHash256HMAC src/Lyra/Tests/ClientTest.php
      */
-    public function testCheckManualHash256HMAC($escape=FALSE)
+    public function testCheckManualHash256HMAC($escaped=FALSE)
     {
         $client = new Client();
         $credentials = $this->getCredentials();
-        $this->fakePostData($escape);
 
         $this->assertNull($client->getLastCalculatedHash());
 
         $client->setSHA256Key($credentials["sha256Key"]);
-        $this->fakePostData('sha256_hmac');
+        $this->fakePostData('sha256_hmac', $escaped);
         $isValid = $client->checkHash($client->getSHA256Key());
         $this->assertTrue($isValid);
         $this->assertNotNull($client->getLastCalculatedHash());
 
         $client->setPassword($credentials["password"]);
-        $this->fakePostData('password');
+        $this->fakePostData('password', $escaped);
         $isValid = $client->checkHash($client->getPassword());
         $this->assertTrue($isValid);
         $this->assertNotNull($client->getLastCalculatedHash());
