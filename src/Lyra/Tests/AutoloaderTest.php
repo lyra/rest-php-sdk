@@ -1,12 +1,12 @@
 <?php
 namespace Lyra\Tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * ./vendor/bin/phpunit src/Lyra/Tests/AutoloaderTest.php
  */
-class AutloaderTest extends PHPUnit_Framework_TestCase
+class AutoloaderTest extends TestCase
 {
     /**
      * ./vendor/bin/phpunit --filter testAutoloader src/Lyra/Tests/AutoloaderTest.php
