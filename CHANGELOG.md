@@ -2,7 +2,7 @@
 
 ### master
 
-- Work in progress
+- Bump PHP vesion support >=7.2
 
 ### 4.0.4 2021-02-22
 

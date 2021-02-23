@@ -4,7 +4,7 @@
     "description": "Lyra REST API PHP SDK",
     "keywords": ["lyra", "api", "sdk", "creditcard", "payment", "rest"],
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.2.0",
         "ext-json": "*"
     },
     "suggest": {
