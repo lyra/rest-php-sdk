@@ -1,14 +1,14 @@
 <?php
 namespace Lyra\Tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Lyra\Client;
 use Lyra\Constants;
 
 /**
  * ./vendor/bin/phpunit src/Lyra/Tests/ClientTest.php
  */
-class ClientTest extends PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
     private function getCredentials()
     {

@@ -2,7 +2,14 @@
 
 ### master
 
+- Work in progress
+
+### 4.0.4 2021-02-22
+
 - do not use json_last_error, json_last_error_msg with PHP 5.4
+- Fix PSR4 tipo (thanks to @DennisdeBest)
+- Update PHPUnit version to 6.x
+- Drop PHP 5.* support
 
 ### 4.0.3 2019-07-31
 
